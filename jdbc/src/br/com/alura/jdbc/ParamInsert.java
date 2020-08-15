@@ -1,41 +1,39 @@
 package br.com.alura.jdbc;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 import br.com.alura.jdbc.factory.ConnectionFactory;
 
-public class TestaInsercaoComParametro {
-
+public class ParamInsert {
 	public static void main(String[] args) throws SQLException {
 		ConnectionFactory factory = new ConnectionFactory();
 		try(Connection connection = factory.recuperarConexao()){
-
 			connection.setAutoCommit(false);
 
 			try (PreparedStatement stm = 
-					connection.prepareStatement("INSERT INTO PRODUTO (nome, descricao) VALUES (?, ?)", Statement.RETURN_GENERATED_KEYS);
+					connection.prepareStatement("INSERT INTO PRODUCT (name, description) VALUES (?, ?)", Statement.RETURN_GENERATED_KEYS);
 					){
-				adicionarVariavel("SmartTV", "45 polegadas", stm);
-				adicionarVariavel("Radio", "Radio de bateria", stm);
+				add("SmartTV", "45", stm);
+				add("Radio", "Batery", stm);
 
 				connection.commit();
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("ROLLBACK EXECUTADO");
+				System.out.println("ROLLBACK");
 				connection.rollback();
 			}
 		}
 	}
 
-	private static void adicionarVariavel(String nome, String descricao, PreparedStatement stm) throws SQLException {
-		stm.setString(1, nome);
-		stm.setString(2, descricao);
+	private static void add(String name, String description, PreparedStatement stm) throws SQLException {
+		stm.setString(1, name);
+		stm.setString(2, description);
 
-		if(nome.equals("Radio")) {
-			throw new RuntimeException("Não foi possível adicionar o produto");
+		if(name.equals("Radio")) {
+			throw new RuntimeException("Couldn't add product");
 		}
 
 		stm.execute();
@@ -43,7 +41,7 @@ public class TestaInsercaoComParametro {
 		try(ResultSet rst = stm.getGeneratedKeys()){
 			while(rst.next()) {
 				Integer id = rst.getInt(1);
-				System.out.println("O id criado foi: " + id);
+				System.out.println("id: " + id);
 			}
 		}
 	}

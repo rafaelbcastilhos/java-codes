@@ -4,16 +4,11 @@ import java.sql.SQLException;
 
 import br.com.alura.jdbc.factory.ConnectionFactory;
 
-public class TestaConexao {
-
+public class ConnectionInit {
 	public static void main(String[] args) throws SQLException {
 
 		ConnectionFactory connectionFactory = new ConnectionFactory();
-		Connection connection = connectionFactory.recuperarConexao();
-
-		System.out.println("Fechando conexão!!");
-
+		Connection connection = connectionFactory.recover();
 		connection.close();
 	}
-
 }

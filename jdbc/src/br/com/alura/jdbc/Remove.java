@@ -2,25 +2,21 @@ package br.com.alura.jdbc;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
 import br.com.alura.jdbc.factory.ConnectionFactory;
 
-public class TestaRemocao {
-
+public class Remove {
 	public static void main(String[] args) throws SQLException {
-
 		ConnectionFactory factory = new ConnectionFactory();
-		Connection connection = factory.recuperarConexao();
+		Connection connection = factory.recover();
 
-		PreparedStatement stm = connection.prepareStatement("DELETE FROM PRODUTO WHERE ID > ?");
+		PreparedStatement stm = connection.prepareStatement("DELETE FROM PRODUCT WHERE ID > ?");
 		stm.setInt(1, 2);
 		stm.execute();
 
-		Integer linhasModificadas = stm.getUpdateCount();
+		Integer row = stm.getUpdateCount();
 
-		System.out.println("Quantidade de linhas que foram modificadas: " + linhasModificadas);
+		System.out.println("Rows modified: " + row);
 		stm.close();
 		connection.close();
 	}
-
 }
