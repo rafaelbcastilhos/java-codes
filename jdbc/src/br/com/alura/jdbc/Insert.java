@@ -7,9 +7,7 @@ import java.sql.Statement;
 import br.com.alura.jdbc.factory.ConnectionFactory;
 
 public class Insert {
-
 	public static void main(String[] args) throws SQLException {
-
 		ConnectionFactory factory = new ConnectionFactory();
 		Connection connection = factory.recover();
 

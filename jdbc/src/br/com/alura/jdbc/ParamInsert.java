@@ -10,7 +10,7 @@ import br.com.alura.jdbc.factory.ConnectionFactory;
 public class ParamInsert {
 	public static void main(String[] args) throws SQLException {
 		ConnectionFactory factory = new ConnectionFactory();
-		try(Connection connection = factory.recuperarConexao()){
+		try(Connection connection = factory.recover()){
 			connection.setAutoCommit(false);
 
 			try (PreparedStatement stm = 

@@ -20,8 +20,8 @@ public class ProductDAO {
 		String sql = "INSERT INTO PRODUTO (NOME, DESCRICAO) VALUES (?, ?)";
 		try(PreparedStatement pstm = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-			pstm.setString(1, product.getNome());
-			pstm.setString(2, product.getDescricao());
+			pstm.setString(1, product.getName());
+			pstm.setString(2, product.getDescription());
 			pstm.execute();
 
 			try(ResultSet rst = pstm.getGeneratedKeys()) {

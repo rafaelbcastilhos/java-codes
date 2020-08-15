@@ -10,7 +10,7 @@ import br.com.alura.jdbc.model.Product;
 public class ListCategory {
 
 	public static void main(String[] args) throws SQLException {
-		try(Connection connection = new ConnectionFactory().recuperarConexao()) {
+		try(Connection connection = new ConnectionFactory().recover()) {
 			CategoryDAO categoryDAO = new CategoryDAO(connection);
 			List<Category> listCategory = categoryDAO.listProduct();
 

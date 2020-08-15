@@ -12,7 +12,7 @@ public class InsertListProduct {
 	public static void main(String[] args) throws SQLException {
 		Product product = new Product("Keyboard", "Keyboard wireless");
 
-		try(Connection connection = new ConnectionFactory().recuperarConexao()) {
+		try(Connection connection = new ConnectionFactory().recover()) {
 			ProductDAO productDao = new ProductDAO(connection);
 			productDao.save(product);
 			List<Product> listProducts = productDao.list();
